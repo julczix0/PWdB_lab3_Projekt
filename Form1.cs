@@ -1,16 +1,26 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
+
 namespace PWdB_lab3_Projekt
 
 {
     public partial class Form1 : Form
     {
         string workingDirectory = Environment.CurrentDirectory;
-        private string path; 
+        private string path;
+        private BindingList<Book> books = new BindingList<Book>();
+        private BindingList<Book> searchedBooks = new BindingList<Book>();
         public Form1()
         {
             InitializeComponent();
-            form2 = new Form2(dataGridView1);
+            form2 = new Form2(dataGridView1, books);
             dataGridView1.AllowUserToAddRows = false;
-            path = Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\test.csv";
+            dataGridView1.DataSource = books;
+            authorBox.Checked = true;
+            path = Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\test.xml";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -20,16 +30,12 @@ namespace PWdB_lab3_Projekt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Add("title", "Tytu³");
-            dataGridView1.Columns.Add("author", "Autor");
-            dataGridView1.Columns.Add("length", "Liczba stron");
-            dataGridView1.Columns.Add("type", "Typ ok³adki");
-            dataGridView1.Columns.Add("price", "Cena");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //Add
+            form2.setIndex();
             form2.Show();
 
         }
@@ -37,48 +43,84 @@ namespace PWdB_lab3_Projekt
         private void button2_Click(object sender, EventArgs e)
         {
             //Remove
-            if (dataGridView1 != null && dataGridView1.Rows.Count != 0) {
-                int currentRow = dataGridView1.CurrentCell.RowIndex;
-                dataGridView1.Rows.RemoveAt(currentRow);
+            if (dataGridView1 != null && dataGridView1.Rows.Count != 0)
+            {
+                deleteFromLists();
             }
             else
             {
                 MessageBox.Show("Brak wierszy do usuniecia!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void deleteFromLists()
+        {
+            int indexToDelete = 0;
+            int indexToDeleteFromSeach = 0;
+            Boolean found1 = false;
+            Boolean found2 = false; 
+            int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
+            string IdToDelete = Convert.ToString(selectedRow.Cells["Id"].Value);
+           
+            foreach (Book cBook in books)
+            {
+                if (cBook.Id == IdToDelete)
+                {
+                    found1 = true;
+                    break;
+                }
+                indexToDelete++;
+            }
+            foreach (Book cBook in searchedBooks)
+            {
+                if (cBook.Id == IdToDelete)
+                {
+                    found2 = true;
+                    break;
+                }
+                indexToDeleteFromSeach++;
+            }
+            if (found1 )
+            {
+                books.RemoveAt(indexToDelete);
+            }
+            if(found2 )
+            {
+                searchedBooks.RemoveAt(indexToDeleteFromSeach);
             }
             
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            var bookSerializer = new XmlSerializer(typeof(BindingList<Book>));
             //Load
             try
             {
-                var lines = File.ReadAllLines(path);
-                foreach (string line in lines)
+                using (var reader = new StreamReader(path))
                 {
-                    var parts = line.Split(',');
-                    if (parts.Length == 5)
+                    BindingList<Book> deserializedBooks = (BindingList<Book>)bookSerializer.Deserialize(reader);
+                    foreach (Book currentBook in deserializedBooks)
                     {
-                        int rowNumber = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[rowNumber].Cells[0].Value = parts[0];
-                        dataGridView1.Rows[rowNumber].Cells[1].Value = parts[1];
-                        dataGridView1.Rows[rowNumber].Cells[2].Value = parts[2];
-                        dataGridView1.Rows[rowNumber].Cells[3].Value = parts[3];
-                        dataGridView1.Rows[rowNumber].Cells[4].Value = parts[4];
+                        books.Add(currentBook);
                     }
                 }
             }
-            catch(Exception ex1)
+            catch (Exception ex1)
             {
                 throw new ApplicationException("Blad odczytu!", ex1);
             }
-           
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            var bookSerializer = new XmlSerializer(typeof(BindingList<Book>));
+
             //Save
-            if(dataGridView1.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0)
             {
                 try
                 {
@@ -92,11 +134,8 @@ namespace PWdB_lab3_Projekt
 
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
                     {
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
-                        {
-                            file.WriteLine(row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString() + "," + row.Cells[3].Value.ToString() + "," + row.Cells[4].Value.ToString());
-                        }
-                    } 
+                        bookSerializer.Serialize(file, books);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +146,65 @@ namespace PWdB_lab3_Projekt
             {
                 MessageBox.Show("Brak danych do zapisu!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            searchedBooks.Clear();
+            if(String.IsNullOrEmpty(searchBar.Text.ToString()))
+            {
+                searchedBooks.Clear();
+                dataGridView1.DataSource = books;
+                return;
+            }
+
+            if (titleBox.Checked)
+            {
+                foreach(Book currentBook in books)
+                {
+                    if(currentBook.Tytu³.ToLower().Contains(searchBar.Text.ToString().ToLower()))
+                    {
+                        searchedBooks.Add(currentBook);
+                    }
+                }
+            }
+            else if (priceBox.Checked)
+            {
+                foreach (Book currentBook in books)
+                {
+                    if (currentBook.Cena.Contains(searchBar.Text.ToString()))
+                    {
+                        searchedBooks.Add(currentBook);
+                    }
+                }
+            }
+            else if (authorBox.Checked)
+            {
+                foreach (Book currentBook in books)
+                {
+                    if (currentBook.Autor.ToLower().Contains(searchBar.Text.ToString().ToLower()))
+                    {
+                        searchedBooks.Add(currentBook);
+                    }
+                }
+            }
+            dataGridView1.DataSource = searchedBooks;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            searchedBooks.Clear();
+            dataGridView1.DataSource = books;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Book>
+    <Id>819df529a033441699c43668df8dd939</Id>
+    <Autor>J. K. Rowling</Autor>
+    <Tytuł>Harry Potter</Tytuł>
+    <Cena>49</Cena>
+    <Strony>400</Strony>
+    <Okładka>Twarda</Okładka>
+  </Book>
+  <Book>
+    <Id>b61a32d309c049dc8a9181d694b47104</Id>
+    <Autor>Stephanie Mayer</Autor>
+    <Tytuł>Zmierzch</Tytuł>
+    <Cena>39</Cena>
+    <Strony>600</Strony>
+    <Okładka>Miekka</Okładka>
+  </Book>
+  <Book>
+    <Id>8071489c60e04b9f88057a65fd90be1f</Id>
+    <Autor>Antoine de-Saint Exupery</Autor>
+    <Tytuł>Mały Książę</Tytuł>
+    <Cena>20</Cena>
+    <Strony>200</Strony>
+    <Okładka>Miekka</Okładka>
+  </Book>
+</ArrayOfBook>

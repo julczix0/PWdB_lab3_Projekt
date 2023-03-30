@@ -28,175 +28,191 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.type = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.length = new System.Windows.Forms.TextBox();
-            this.author = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.title = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.price = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            openFileDialog1 = new OpenFileDialog();
+            groupBox1 = new GroupBox();
+            type = new ComboBox();
+            price = new TextBox();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            length = new TextBox();
+            author = new TextBox();
+            label2 = new Label();
+            title = new TextBox();
+            label1 = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.price);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.type);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.length);
-            this.groupBox1.Controls.Add(this.author);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.title);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(24, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(590, 524);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Dodaj element do listy";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            groupBox1.Controls.Add(type);
+            groupBox1.Controls.Add(price);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(length);
+            groupBox1.Controls.Add(author);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(title);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox1.Location = new Point(15, 8);
+            groupBox1.Margin = new Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(363, 328);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Dodaj element do listy";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // type
             // 
-            this.type.Location = new System.Drawing.Point(179, 445);
-            this.type.Name = "type";
-            this.type.Size = new System.Drawing.Size(200, 50);
-            this.type.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AllowDrop = true;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(111, 386);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(352, 37);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Typ okładki (twarda/miękka)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(283, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(271, 37);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Długość (liczba stron)";
-            // 
-            // length
-            // 
-            this.length.Location = new System.Drawing.Point(283, 135);
-            this.length.Name = "length";
-            this.length.Size = new System.Drawing.Size(200, 50);
-            this.length.TabIndex = 4;
-            this.length.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // author
-            // 
-            this.author.Location = new System.Drawing.Point(30, 298);
-            this.author.Name = "author";
-            this.author.Size = new System.Drawing.Size(200, 50);
-            this.author.TabIndex = 3;
-            this.author.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(30, 230);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 37);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Autor";
-            // 
-            // title
-            // 
-            this.title.Location = new System.Drawing.Point(30, 135);
-            this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(200, 50);
-            this.title.TabIndex = 1;
-            this.title.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(30, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tytuł";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(638, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 55);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Zapisz";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(638, 242);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 53);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Wyjdź";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(283, 230);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 37);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Cena";
+            type.FormattingEnabled = true;
+            type.Items.AddRange(new object[] { "Twarda", "Miękka" });
+            type.Location = new Point(104, 276);
+            type.Name = "type";
+            type.Size = new Size(151, 36);
+            type.TabIndex = 11;
+            type.SelectedIndexChanged += comboBox1_SelectedIndexChanged_1;
             // 
             // price
             // 
-            this.price.Location = new System.Drawing.Point(283, 298);
-            this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(200, 50);
-            this.price.TabIndex = 9;
-            this.price.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            price.Location = new Point(174, 186);
+            price.Margin = new Padding(2);
+            price.Name = "price";
+            price.Size = new Size(125, 34);
+            price.TabIndex = 9;
+            price.TextChanged += textBox1_TextChanged_1;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(174, 144);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(49, 23);
+            label5.TabIndex = 8;
+            label5.Text = "Cena";
+            // 
+            // label4
+            // 
+            label4.AllowDrop = true;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(68, 241);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(222, 23);
+            label4.TabIndex = 6;
+            label4.Text = "Typ okładki (twarda/miękka)";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(174, 44);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(174, 23);
+            label3.TabIndex = 5;
+            label3.Text = "Długość (liczba stron)";
+            // 
+            // length
+            // 
+            length.Location = new Point(174, 84);
+            length.Margin = new Padding(2);
+            length.Name = "length";
+            length.Size = new Size(125, 34);
+            length.TabIndex = 4;
+            length.TextChanged += textBox3_TextChanged;
+            // 
+            // author
+            // 
+            author.Location = new Point(18, 186);
+            author.Margin = new Padding(2);
+            author.Name = "author";
+            author.Size = new Size(125, 34);
+            author.TabIndex = 3;
+            author.TextChanged += textBox2_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(18, 144);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(53, 23);
+            label2.TabIndex = 2;
+            label2.Text = "Autor";
+            // 
+            // title
+            // 
+            title.Location = new Point(18, 84);
+            title.Margin = new Padding(2);
+            title.Name = "title";
+            title.Size = new Size(125, 34);
+            title.TabIndex = 1;
+            title.TextChanged += textBox1_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(18, 36);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 23);
+            label1.TabIndex = 0;
+            label1.Text = "Tytuł";
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(393, 100);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(92, 34);
+            button1.TabIndex = 8;
+            button1.Text = "Zapisz";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.Location = new Point(393, 151);
+            button2.Margin = new Padding(2);
+            button2.Name = "button2";
+            button2.Size = new Size(92, 33);
+            button2.TabIndex = 9;
+            button2.Text = "Wyjdź";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 570);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(583, 356);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(groupBox1);
+            Margin = new Padding(2);
+            Name = "Form2";
+            Text = "Form2";
+            Load += Form2_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -212,8 +228,8 @@
         private Label label4;
         private Button button1;
         private Button button2;
-        private TextBox type;
         private TextBox price;
         private Label label5;
+        private ComboBox type;
     }
 }

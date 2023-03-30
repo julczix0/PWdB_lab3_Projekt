@@ -7,22 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PWdB_lab3_Projekt
 {
     public partial class Form2 : Form
     {
         private DataGridView dataGridView;
+        private BindingList<Book> books;
 
-        public Form2(DataGridView dataGridView)
+        public Form2(DataGridView dataGridView, BindingList<Book> books)
         {
             this.dataGridView = dataGridView;
+            this.books = books;
             InitializeComponent();
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            this.ControlBox = false;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -37,7 +41,11 @@ namespace PWdB_lab3_Projekt
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            //liczba stron
+            if (System.Text.RegularExpressions.Regex.IsMatch(length.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Wprowadź liczby!");
+                length.Text = length.Text.Remove(length.Text.Length - 1);
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -52,22 +60,28 @@ namespace PWdB_lab3_Projekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int rowNumber = dataGridView.Rows.Add();
-            if (this.title.Text.ToString().Equals("") && this.author.Text.ToString().Equals("") 
-                && this.length.Text.ToString().Equals("") && this.type.Text.ToString().Equals("") 
-                && this.price.Text.ToString().Equals(""))
+            if (string.IsNullOrEmpty(title.Text.ToString()) || string.IsNullOrEmpty(author.Text.ToString())
+                || string.IsNullOrEmpty(length.Text.ToString())
+                || string.IsNullOrEmpty(price.Text.ToString()))
             {
                 MessageBox.Show("Należy wypelnic wszystkie pola tekstowe!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            dataGridView.Rows[rowNumber].Cells[0].Value = this.title.Text.ToString(); 
-            dataGridView.Rows[rowNumber].Cells[1].Value = this.author.Text.ToString(); 
-            dataGridView.Rows[rowNumber].Cells[2].Value = this.length.Text.ToString();
-            dataGridView.Rows[rowNumber].Cells[3].Value = this.type.Text.ToString();
-            dataGridView.Rows[rowNumber].Cells[4].Value = this.price.Text.ToString();
-            this.title.Text = ""; 
-            this.author.Text = ""; 
+            CoverType coverType;
+            if (this.type.SelectedIndex == 0)
+            {
+                coverType = CoverType.Twarda;
+            }
+            else
+            {
+                coverType = CoverType.Miekka;
+            }
+
+            books.Add(new Book(author.Text.ToString(), title.Text.ToString(), price.Text.ToString(), length.Text.ToString(), coverType)); ;
+
+            this.title.Text = "";
+            this.author.Text = "";
             this.length.Text = "";
-            this.type.Text = ""; 
             this.price.Text = "";
 
         }
@@ -79,7 +93,21 @@ namespace PWdB_lab3_Projekt
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
+        }
 
+        private void type_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public void setIndex()
+        {
+            type.SelectedIndex = 0;
         }
     }
 }
